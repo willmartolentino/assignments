@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Assignment 2</title>
+    </head>
+    <body>
+        <ol id="fruits">
+            <li>Grape</li>
+            <li>Banana</li>
+            <li>Apple</li>
+            <li>Kiwi</li>
+            <li>Orange</li>
+            <li>Blueberry</li>
+            <li>Strawberry</li>
+            <li>Raspberry</li>
+            <li>Lemon</li>
+            <li>Peach</li>
+            <li>Melon</li>
+            <li>Pineapple</li>
+        </ol>
+        <script>
+            // Instructions / Rules:
+            /*
+            1. The HTML Content must NOT be edited. Only the script tag contents can be edited.
+
+            2. get all the values of li 'ol#fruits' element and store it in an array called fruits.
+               You may store the fruits elementNode in the variable fruitsEl.
+            3. console.log the values of fruits variable.
+
+            4. Create a section tag with ordered list of fruits that DOES NOT end with "berry", you must use a function that you will create and call generateList(values, title).
+            5. Inside the newly created "section", you will add an h3 with the value of "Non-berries" passed as a second argument of the generateList function.
+            6. You may store the Non-berries in a variable nonBerries;
+
+            7. Uncomment the last generateList call (the one your names array). lols.
+
+            8. Recommended structure is available below.
+            */
+            
+            var doc = document,
+                dBody = doc.body,
+                section = doc.createElement("section"),
+                ol = doc.createElement("ol"),
+                h3 = doc.createElement("h3");
+
+            var generateList = function (values, title) {
+                dBody.appendChild(section);
+                section.appendChild(h3).innerHTML = title;
+                section.appendChild(ol);
+                
+            };
+
+             var fruitsEl   = doc.getElementById("fruits").children, // li's
+                 fruits     = [];
+                 nonBerries = [];
+                 
+            for (var i =0; i < fruitsEl.length; i++) {
+                console.log(fruitsEl[i].innerHTML);
+                fruits.push(fruitsEl[i].innerHTML);
+            }
+
+            console.log(fruits);
+
+            // var re = //;
+            // for ...
+            // }
+            
+            //generateList(nonBerries, 'Non-berries');
+
+            //generateList(['April', 'Exi', 'Mikko', 'Darren', 'Hector'], 'Lols');
+        </script>
+    </body>
+</html>
