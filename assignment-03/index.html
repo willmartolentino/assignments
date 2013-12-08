@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Assignment 3</title>
+    </head>
+    <body>
+        <script>
+            // Instructions
+            // 1. See preview png, assignment-3-preview.png
+            // 2. Only the Script tag contents should be edited.
+            // 3. You must not edit the variable MyWebsite.
+            // 4. You must use "for" loop to iterate the pages > titles and generate the nav element and its content
+            // 5. You will create a toSlug function to generate the hrefs of the anchors, based on the title.
+            // 6. Add an Event Listener to the Anchors and when clicked, the title, h1 and the url should be updated.
+            // 7. Lols
+
+            var MyWebsite = {
+                pages: [
+                    {
+                        title: 'Home'
+                    },
+                    
+                    {
+                        title: 'About Us'
+                    },
+                    
+                    {
+                       title: 'Contact Us'
+                    }
+                ]
+            };
+            
+            var d = document,
+                dbody = d.body,
+                pages = MyWebsite.pages,
+                nav = "",
+                h1 = "",
+                ul = "",
+                li = "",
+                a = "",
+                aValues = "";
+            
+            nav = d.createElement("nav");
+            
+            ul = d.createElement("ul");
+            nav.appendChild(ul);
+            
+            for(var i = 0; i < pages.length; i++) {
+                dbody.appendChild(nav).id = "nav";
+                li = d.createElement("li");
+                ul.appendChild(li);
+                
+                a = d.createElement("a");
+                page = pages[i].title;
+                a.appendChild(d.createTextNode(page));
+                a.setAttribute('href', '#' + page);
+                
+                li.appendChild(a);
+            }
+            
+            var toSlug = function (title) {
+                d.head.children[1].innerHTML = title;
+                dbody.appendChild(nav).id = "nav";
+                
+                var aElements = d.getElementById("nav").getElementsByTagName("a");
+                
+                for (var i = 0; i < aElements.length; i++) {
+                    var aHash = aElements[i].innerHTML;
+                    console.log(aHash);
+                    aElements[i].href = '#' + aHash.replace(/\W+/g, '-').toLowerCase();
+                }
+                
+                dbody.appendChild(h1).id = "main-title";
+            }
+            
+            a.addEventListener('click', toSlug, false);
+        </script>
+    </body>
+</html>
