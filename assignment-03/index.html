@@ -31,50 +31,48 @@
                 ]
             };
             
-            var d = document,
-                dbody = d.body,
-                pages = MyWebsite.pages,
-                nav = "",
-                h1 = "",
-                ul = "",
-                li = "",
-                a = "",
-                aValues = "";
+            //pages: [{title: 'Home'},{title: 'About Us'},{title: 'Contact Us'}]
             
-            nav = d.createElement("nav");
-            
-            ul = d.createElement("ul");
-            nav.appendChild(ul);
-            
-            for(var i = 0; i < pages.length; i++) {
-                dbody.appendChild(nav).id = "nav";
-                li = d.createElement("li");
-                ul.appendChild(li);
+            var doc = document,
+                dbody = document.body,
+                titles = MyWebsite.pages,
+                title,
+                nav,
+                h1,
+                ul,
+                li,
+                a;
                 
-                a = d.createElement("a");
-                page = pages[i].title;
-                a.appendChild(d.createTextNode(page));
-                a.setAttribute('href', '#' + page);
-                
-                li.appendChild(a);
+            nav = doc.createElement("nav"); // Create <nav> tag
+            dbody.appendChild(nav).id = "nav"; // Append <nav> tag to the <body> tag
+            
+            ul = doc.createElement("ul"); // Create <ul> tag
+            nav.appendChild(ul); // Append <ul> tag to the <nav> tag
+            
+            // This function converts the string to lowercase and make it a slug
+            var toSlug = function ( titleSlug ) {
+                var slug = titleSlug.toLowerCase().replace(/\W+/gi, '-');
+                return slug;
             }
             
-            var toSlug = function (title) {
-                d.head.children[1].innerHTML = title;
-                dbody.appendChild(nav).id = "nav";
+            for ( var i = 0, len = titles.length; i < len; i++ ) {
+                title = titles[i].title;
                 
-                var aElements = d.getElementById("nav").getElementsByTagName("a");
-                
-                for (var i = 0; i < aElements.length; i++) {
-                    var aHash = aElements[i].innerHTML;
-                    console.log(aHash);
-                    aElements[i].href = '#' + aHash.replace(/\W+/g, '-').toLowerCase();
-                }
-                
-                dbody.appendChild(h1).id = "main-title";
+                li = doc.createElement("li"); // Create <li> tag
+                a = doc.createElement("a"); // Create <a> tag
+                li.appendChild(a); // Append <a> tag to the <li> tag
+                a.appendChild(doc.createTextNode(title)); // Create text inside the <a> tag based on the titles
+                a.href = "#" + toSlug(title); // Adding href attribute to the <a> tag
+                ul.appendChild(li); // Append <li> tag to the <ul> tag
             }
             
-            a.addEventListener('click', toSlug, false);
+            doc.title = titles[0].title; // Set default value for the <title> tag
+            
+            h1 = doc.createElement("h1"); // Create <h1> tag
+            dbody.appendChild(h1).id = "main-title"; // Append <h1> tag to the <body> tag with its id
+            h1.innerHTML = titles[0].title; // Set default value for the <h1> tag
+            
+            a.addEventListener("click", function() {}, false )
         </script>
     </body>
 </html>
