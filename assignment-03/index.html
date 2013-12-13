@@ -31,8 +31,6 @@
                 ]
             };
             
-            //pages: [{title: 'Home'},{title: 'About Us'},{title: 'Contact Us'}]
-            
             var doc = document,
                 dbody = document.body,
                 titles = MyWebsite.pages,
@@ -48,10 +46,16 @@
             
             ul = doc.createElement("ul"); // Create <ul> tag
             nav.appendChild(ul); // Append <ul> tag to the <nav> tag
+
+            doc.title = titles[0].title; // Set default value for the <title> tag
+            
+            h1 = doc.createElement("h1"); // Create <h1> tag
+            dbody.appendChild(h1).id = "main-title"; // Append <h1> tag to the <body> tag with its id
+            h1.innerHTML = titles[0].title; // Set default value for the <h1> tag
             
             // This function converts the string to lowercase and make it a slug
             var toSlug = function ( titleSlug ) {
-                var slug = titleSlug.toLowerCase().replace(/\W+/gi, '-');
+                var slug = titleSlug.toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '');
                 return slug;
             }
             
@@ -64,15 +68,13 @@
                 a.appendChild(doc.createTextNode(title)); // Create text inside the <a> tag based on the titles
                 a.href = "#" + toSlug(title); // Adding href attribute to the <a> tag
                 ul.appendChild(li); // Append <li> tag to the <ul> tag
+
+                a.addEventListener("click", function(evt) {
+                    var aTarget = evt.target;
+                    h1.innerHTML = aTarget.innerHTML;
+                    doc.title = aTarget.innerHTML;
+                }, false )
             }
-            
-            doc.title = titles[0].title; // Set default value for the <title> tag
-            
-            h1 = doc.createElement("h1"); // Create <h1> tag
-            dbody.appendChild(h1).id = "main-title"; // Append <h1> tag to the <body> tag with its id
-            h1.innerHTML = titles[0].title; // Set default value for the <h1> tag
-            
-            a.addEventListener("click", function() {}, false )
         </script>
     </body>
 </html>
